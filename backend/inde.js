@@ -6,15 +6,17 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const port = process.env.PORT || 4000;
+require('dotenv').config();
 
 app.use(express.json());
 app.use(cors());
 
-// Database Connection With MongoDB
-mongoose.connect("--------- paste your mongodb link ----------/e-commerce");
+const MongoURL = process.env.MONGO_URL;
+mongoose.connect(MongoURL, {
 
-// paste your mongoDB Connection string above with password
-// password should not contain '@' special character
+})
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.error("MongoDB connection error:", error));
 
 
 //Image Storage Engine 
